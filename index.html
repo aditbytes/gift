@@ -1,567 +1,204 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Teachers' Day, Akshita 🍎</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1b0f1e; --plum:#2c1832; --chalk:#fff3ea; --blush:#ffd3e2;
+  --apple:#ff5a7a; --lilac:#b9a2ff; --muted:#cdb7c9;
+  --serif:"Fraunces",Georgia,serif; --sans:"Manrope","Segoe UI",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--ink);color:var(--chalk);line-height:1.7;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--lilac);outline-offset:3px}
 
-  <title>Happy Teachers' Day, Akshita ❤️🌸</title>
+/* ambient glow */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(60vmax 60vmax at 10% 0%,rgba(255,90,122,.22),transparent 60%),
+             radial-gradient(60vmax 60vmax at 100% 100%,rgba(185,162,255,.2),transparent 60%)}
+main,footer{position:relative;z-index:2}
+.float{position:fixed;bottom:-40px;z-index:1;pointer-events:none;opacity:0;animation:rise linear forwards}
+@keyframes rise{10%{opacity:.7}100%{transform:translateY(-115vh) rotate(300deg);opacity:0}}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+.wrap{max-width:960px;margin:auto;padding:0 22px}
+section{padding:90px 0}
 
-    html {
-      scroll-behavior: smooth;
-    }
+/* hero */
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:60px 0}
+.date{display:inline-block;padding:8px 18px;border:1px solid rgba(255,211,226,.35);border-radius:99px;
+  color:var(--blush);font-size:.95rem;backdrop-filter:blur(8px);background:rgba(255,255,255,.05)}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(2.8rem,9vw,6.5rem);line-height:1.02;
+  letter-spacing:-.02em;margin:26px 0 18px;color:var(--chalk)}
+h1 .name{display:block;font-style:italic;font-weight:500;
+  background:linear-gradient(100deg,var(--apple),var(--lilac),var(--apple));background-size:200% auto;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+@keyframes shine{to{background-position:200% center}}
+.hero p.sub{max-width:520px;margin:0 auto;color:var(--muted);font-size:1.15rem}
+.apple{font-size:4rem;display:block;margin-top:28px;animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-10px) rotate(6deg)}}
+.btn{display:inline-block;margin-top:34px;padding:16px 32px;border-radius:99px;border:0;cursor:pointer;
+  font:700 1rem var(--sans);color:var(--ink);text-decoration:none;
+  background:linear-gradient(135deg,var(--blush),var(--apple));box-shadow:0 14px 40px rgba(255,90,122,.35);
+  transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 20px 50px rgba(255,90,122,.5)}
 
-    body {
-      font-family: "Poppins", "Segoe UI", sans-serif;
-      background: #fff7fb;
-      color: #3a2430;
-      overflow-x: hidden;
-    }
+h2{font-family:var(--serif);font-weight:700;font-size:clamp(2rem,5vw,3.2rem);line-height:1.1;margin-bottom:12px}
+.lead{color:var(--muted);margin-bottom:44px;max-width:520px}
 
-    /* Floating emojis */
-    .emoji {
-      position: fixed;
-      bottom: -50px;
-      font-size: 25px;
-      animation: floatUp linear infinite;
-      opacity: 0.75;
-      pointer-events: none;
-      z-index: 1;
-    }
+/* envelope */
+.letter-zone{display:grid;place-items:center}
+.envelope{position:relative;width:min(100%,420px);aspect-ratio:7/5;cursor:pointer;border:0;background:none;
+  font:inherit;color:inherit;perspective:900px}
+.env-back,.env-front{position:absolute;inset:0;border-radius:14px}
+.env-back{background:#e8a4bd}
+.env-front{background:linear-gradient(160deg,#ffc2d6,#f089ab);clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%);z-index:3}
+.flap{position:absolute;left:0;right:0;top:0;height:55%;background:#f7a8c2;border-radius:14px 14px 0 0;
+  clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .7s ease;z-index:4}
+.seal{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);font-size:2.4rem;z-index:5;transition:opacity .3s}
+.paper{position:absolute;left:8%;right:8%;top:8%;height:80%;background:var(--chalk);border-radius:8px;z-index:2;
+  transition:transform .8s ease .35s}
+.envelope.open .flap{transform:rotateX(180deg);z-index:1}
+.envelope.open .seal{opacity:0}
+.envelope.open .paper{transform:translateY(-62%)}
+.hint{margin-top:18px;color:var(--muted);font-size:.95rem}
+.letter{max-height:0;overflow:hidden;opacity:0;transition:max-height 1s ease,opacity .8s ease .3s;width:100%}
+.letter.show{max-height:1400px;opacity:1}
+.paper-card{margin-top:40px;background:var(--chalk);color:#3a2430;border-radius:24px;padding:clamp(28px,6vw,56px);
+  box-shadow:0 30px 80px rgba(0,0,0,.45);font-family:var(--serif);font-size:1.2rem;line-height:1.85}
+.paper-card p+p{margin-top:1.1em}
+.paper-card em{color:#d6336c;font-weight:500}
+.paper-card .end{font-weight:700;font-size:1.3rem}
 
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0;
-      }
+/* report card */
+.report{background:rgba(255,255,255,.05);border:1px solid rgba(255,211,226,.18);border-radius:26px;
+  padding:clamp(22px,5vw,46px);backdrop-filter:blur(12px)}
+.report-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding-bottom:18px;
+  border-bottom:2px dashed rgba(255,211,226,.3);margin-bottom:8px;color:var(--blush)}
+.row{display:grid;grid-template-columns:1fr auto;gap:6px 20px;align-items:center;padding:20px 0;
+  border-bottom:1px solid rgba(255,255,255,.08)}
+.row:last-child{border:0}
+.row h3{font-family:var(--serif);font-size:1.35rem}
+.row p{grid-column:1;color:var(--muted);font-size:.98rem}
+.grade{grid-row:1 / span 2;grid-column:2;font-family:var(--serif);font-weight:700;font-size:2.2rem;
+  color:var(--apple);border:3px solid var(--apple);border-radius:50%;width:68px;height:68px;display:grid;
+  place-items:center;transform:rotate(-8deg) scale(.4);opacity:0;transition:transform .6s cubic-bezier(.3,1.6,.5,1),opacity .3s}
+.row.in .grade{transform:rotate(-8deg) scale(1);opacity:1}
+.row:nth-child(3) .grade{transition-delay:.15s}.row:nth-child(4) .grade{transition-delay:.3s}.row:nth-child(5) .grade{transition-delay:.45s}
 
-      15% {
-        opacity: 0.8;
-      }
+/* quote */
+.quote{text-align:center}
+.quote blockquote{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(1.6rem,4.5vw,2.8rem);
+  line-height:1.35;max-width:780px;margin:auto}
+.quote p{margin-top:22px;color:var(--blush)}
 
-      100% {
-        transform: translateY(-110vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
+/* thanks */
+.thanks{text-align:center;background:var(--plum);border-radius:40px 40px 0 0;padding:110px 0}
+.thanks p{max-width:620px;margin:20px auto 0;color:var(--muted);font-size:1.1rem}
+.sig{margin-top:44px;font-family:var(--serif);font-style:italic;font-size:1.6rem;color:var(--blush)}
+footer{text-align:center;padding:26px;background:var(--plum);color:var(--muted);font-size:.9rem}
 
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 30px 20px;
-      position: relative;
-      background:
-        radial-gradient(circle at top left, #ffd6e8, transparent 35%),
-        radial-gradient(circle at bottom right, #dcd2ff, transparent 35%),
-        linear-gradient(135deg, #fff5fa, #f9f5ff);
-    }
-
-    .hero-content {
-      max-width: 850px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .small {
-      font-size: 1.1rem;
-      letter-spacing: 3px;
-      color: #b94d78;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      font-size: clamp(3rem, 8vw, 7rem);
-      line-height: 1;
-      background: linear-gradient(90deg, #ff4f91, #a44cff, #ff4f91);
-      background-size: 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradientMove 4s infinite linear;
-    }
-
-    @keyframes gradientMove {
-      0% { background-position: 0%; }
-      100% { background-position: 200%; }
-    }
-
-    .subtitle {
-      margin-top: 25px;
-      font-size: clamp(1.1rem, 3vw, 1.5rem);
-      line-height: 1.7;
-      color: #5f4652;
-    }
-
-    .heart {
-      font-size: 5rem;
-      margin: 25px 0;
-      animation: heartbeat 1.4s infinite;
-    }
-
-    @keyframes heartbeat {
-      0%, 100% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.18);
-      }
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 16px 30px;
-      border-radius: 50px;
-      background: linear-gradient(135deg, #ff4f91, #a44cff);
-      color: white;
-      text-decoration: none;
-      font-weight: 700;
-      box-shadow: 0 15px 35px rgba(164, 76, 255, 0.25);
-      transition: 0.3s;
-    }
-
-    .btn:hover {
-      transform: translateY(-5px) scale(1.03);
-    }
-
-    /* SECTION */
-    section {
-      padding: 90px 20px;
-      position: relative;
-    }
-
-    .container {
-      max-width: 950px;
-      margin: auto;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 2.6rem;
-      margin-bottom: 45px;
-      color: #702b4c;
-    }
-
-    /* MESSAGE CARD */
-    .card {
-      background: rgba(255,255,255,0.8);
-      backdrop-filter: blur(15px);
-      border-radius: 30px;
-      padding: 45px;
-      box-shadow: 0 20px 60px rgba(111, 50, 90, 0.12);
-      border: 1px solid rgba(255,255,255,0.7);
-      text-align: center;
-      font-size: 1.15rem;
-      line-height: 2;
-    }
-
-    .card p {
-      margin-bottom: 20px;
-    }
-
-    .highlight {
-      color: #e13e7c;
-      font-weight: 700;
-    }
-
-    /* REASONS */
-    .reasons {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .reason {
-      background: white;
-      padding: 30px 20px;
-      border-radius: 25px;
-      text-align: center;
-      box-shadow: 0 15px 40px rgba(90, 40, 70, 0.08);
-      transition: 0.3s;
-    }
-
-    .reason:hover {
-      transform: translateY(-8px);
-    }
-
-    .reason .icon {
-      font-size: 3rem;
-      margin-bottom: 15px;
-    }
-
-    .reason h3 {
-      color: #9b3561;
-      margin-bottom: 10px;
-    }
-
-    /* SPECIAL MESSAGE */
-    .special {
-      background: linear-gradient(135deg, #ffebf4, #eee7ff);
-    }
-
-    .quote {
-      font-size: clamp(1.5rem, 4vw, 2.4rem);
-      font-weight: 600;
-      line-height: 1.5;
-      color: #632943;
-    }
-
-    /* LOVE */
-    .love {
-      text-align: center;
-      padding: 110px 20px;
-      background: #2b1823;
-      color: white;
-    }
-
-    .love h2 {
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      margin-bottom: 25px;
-    }
-
-    .love p {
-      max-width: 700px;
-      margin: auto;
-      line-height: 1.9;
-      color: #f6dce8;
-      font-size: 1.1rem;
-    }
-
-    .signature {
-      margin-top: 40px;
-      font-size: 1.3rem;
-      color: #ff9bc2;
-      font-weight: 700;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      background: #1d1017;
-      color: #bfaab4;
-      font-size: 0.9rem;
-    }
-
-    /* MOBILE */
-    @media (max-width: 700px) {
-      .reasons {
-        grid-template-columns: 1fr;
-      }
-
-      .card {
-        padding: 30px 22px;
-      }
-
-      section {
-        padding: 70px 18px;
-      }
-    }
-  </style>
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}.grade{opacity:1;transform:rotate(-8deg)}
+  .letter{max-height:none;opacity:1}
+}
+</style>
 </head>
-
 <body>
+<main>
+  <header class="hero"><div class="wrap">
+    <span class="date">5 October · World Teachers' Day</span>
+    <h1>Happy Teachers' Day,<span class="name">Akshita</span></h1>
+    <p class="sub">To the most special teacher in my life. I made this little page just for you. 🥹🌸</p>
+    <span class="apple" aria-hidden="true">🍎</span>
+    <a href="#message" class="btn">Open your message 💌</a>
+  </div></header>
 
-  <!-- Floating emojis -->
-  <div class="emoji" style="left:5%; animation-duration:8s;">❤️</div>
-  <div class="emoji" style="left:15%; animation-duration:11s;">🌸</div>
-  <div class="emoji" style="left:25%; animation-duration:9s;">📚</div>
-  <div class="emoji" style="left:35%; animation-duration:13s;">✨</div>
-  <div class="emoji" style="left:45%; animation-duration:10s;">🍎</div>
-  <div class="emoji" style="left:55%; animation-duration:12s;">🥰</div>
-  <div class="emoji" style="left:65%; animation-duration:9s;">💖</div>
-  <div class="emoji" style="left:75%; animation-duration:14s;">👩‍🏫</div>
-  <div class="emoji" style="left:85%; animation-duration:10s;">🌷</div>
-  <div class="emoji" style="left:95%; animation-duration:12s;">💕</div>
-
-  <!-- HERO -->
-  <header class="hero">
-
-    <div class="hero-content">
-
-      <div class="small">
-        🌎 OCTOBER 5 • FOR AKSHITA 🌎
+  <section id="message"><div class="wrap letter-zone">
+    <div style="text-align:center">
+      <h2>A letter for you</h2>
+      <p class="lead" style="margin-inline:auto">Tap the envelope.</p>
+    </div>
+    <button class="envelope" id="env" aria-expanded="false" aria-controls="letter" aria-label="Open the letter">
+      <span class="env-back"></span><span class="paper"></span><span class="flap"></span>
+      <span class="env-front"></span><span class="seal" aria-hidden="true">❤️</span>
+    </button>
+    <p class="hint" id="hint">Something is waiting inside…</p>
+    <div class="letter" id="letter">
+      <div class="paper-card">
+        <p>Happy Teachers' Day, Akshita. You make my world a little brighter every single day. ❤️</p>
+        <p>A teacher doesn't only teach from books. They guide, encourage, and make you believe you can become better. <em>You have taught me more than you probably realise.</em></p>
+        <p>You taught me patience. You taught me to care. You taught me to smile even on bad days, and that having someone special beside you can make life feel completely different. 💕</p>
+        <p>So today isn't only about celebrating a teacher. It's about celebrating <em>you</em>. 🌸</p>
+        <p class="end">Happy Teachers' Day, my favourite teacher. 👩‍🏫</p>
       </div>
-
-      <h1>
-        Happy Teachers' Day, Akshita ❤️
-      </h1>
-
-      <div class="heart">
-        ❤️
-      </div>
-
-      <p class="subtitle">
-        To the most special teacher in my life... 🥹🌸
-        <br>
-        This little webpage is just for <strong>you</strong>. 💕
-      </p>
-
-      <a href="#message" class="btn">
-        💌 Open Your Message
-      </a>
-
     </div>
+  </div></section>
 
-  </header>
-
-
-  <!-- MESSAGE -->
-  <section id="message">
-
-    <div class="container">
-
-      <h2 class="section-title">
-        💐 A Little Message For You 💐
-      </h2>
-
-      <div class="card">
-
-        <p>
-          Happy Teachers' Day, Akshita — to the girl who makes my world
-          a little brighter every single day. ❤️✨
-        </p>
-
-        <p>
-          A teacher doesn't just teach from books...
-          they inspire, guide, encourage and make people believe
-          that they can become better. 📚🌱✨
-        </p>
-
-        <p>
-          And honestly...
-          <span class="highlight">
-            you have taught me more than you probably realize. 🥹❤️
-          </span>
-        </p>
-
-        <p>
-          You've taught me patience 😌,
-          you've taught me to care 🫶,
-          you've taught me to smile even on bad days 😊,
-          and you've taught me that having someone special beside you
-          can make life feel completely different. 💕
-        </p>
-
-        <p>
-          So today isn't just about celebrating a teacher...
-          it's about celebrating <strong>YOU</strong>. 🌸👑
-        </p>
-
-        <p>
-          📚👩‍🏫✨
-          <br>
-          <strong>
-            Happy Teachers' Day, Akshita — my favourite teacher. ❤️
-          </strong>
-        </p>
-
-      </div>
-
+  <section><div class="wrap reveal">
+    <h2>Your report card</h2>
+    <p class="lead">Graded by the one student who never skips your class.</p>
+    <div class="report">
+      <div class="report-head"><strong>Teacher: Akshita</strong><span>Term: every day since we met</span></div>
+      <div class="row"><h3>Inspiring</h3><p>You make people want to become better. ✨</p><div class="grade">A+</div></div>
+      <div class="row"><h3>Caring</h3><p>Your kindness makes people feel safe and understood. 🫶</p><div class="grade">A+</div></div>
+      <div class="row"><h3>Patience</h3><p>You never gave up on me, even on my slow days. 😌</p><div class="grade">A+</div></div>
+      <div class="row"><h3>One of a kind</h3><p>There is only one you, and that is exactly why. 👑</p><div class="grade">★</div></div>
     </div>
+  </div></section>
 
-  </section>
+  <section class="quote"><div class="wrap reveal">
+    <blockquote>A good teacher teaches lessons. A great teacher leaves a little piece of themselves in your heart.</blockquote>
+    <p>Somehow, you've managed to do both. 🌷</p>
+  </div></section>
 
+  <section class="thanks"><div class="wrap reveal">
+    <h2>Thank you ❤️</h2>
+    <p>Akshita, thank you for your patience, your kindness, your smile, and all the little things that make you <strong>you</strong>.</p>
+    <p>Today I celebrate the teacher in you. Every other day, I celebrate the person I'm lucky enough to have in my life.</p>
+    <div class="sig">With lots and lots of love,<br>Yours ❤️</div>
+  </div></section>
+</main>
+<footer>Made with ❤️ for Akshita · Happy Teachers' Day 🌸</footer>
 
-  <!-- REASONS -->
-  <section>
+<script>
+const env=document.getElementById('env'),letter=document.getElementById('letter'),hint=document.getElementById('hint');
+env.addEventListener('click',()=>{
+  const open=env.classList.toggle('open');
+  letter.classList.toggle('show',open);
+  env.setAttribute('aria-expanded',open);
+  hint.textContent=open?'Read it slowly 💕':'Something is waiting inside…';
+  if(open) burst();
+});
 
-    <div class="container">
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const sets=['❤️','💕','🌸','✨','📚','🍎'];
+function spawn(x){
+  if(reduce) return;
+  const e=document.createElement('span');
+  e.className='float';e.textContent=sets[Math.random()*sets.length|0];
+  e.style.left=(x??Math.random()*100)+'%';
+  e.style.fontSize=(16+Math.random()*18)+'px';
+  e.style.animationDuration=(8+Math.random()*7)+'s';
+  document.body.appendChild(e);setTimeout(()=>e.remove(),16000);
+}
+function burst(){for(let i=0;i<14;i++)setTimeout(()=>spawn(30+Math.random()*40),i*90)}
+setInterval(spawn,1400);
 
-      <h2 class="section-title">
-        🥰 Why You're Special
-      </h2>
-
-      <div class="reasons">
-
-        <div class="reason">
-          <div class="icon">📚</div>
-          <h3>Inspiring</h3>
-          <p>
-            You have a way of making people want to become better. ✨
-          </p>
-        </div>
-
-        <div class="reason">
-          <div class="icon">🌸</div>
-          <h3>Caring</h3>
-          <p>
-            Your kindness makes people feel safe and understood. 🫶
-          </p>
-        </div>
-
-        <div class="reason">
-          <div class="icon">👑</div>
-          <h3>One of a Kind</h3>
-          <p>
-            There is only one you, and that's exactly why you're special. ❤️
-          </p>
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- QUOTE -->
-  <section class="special">
-
-    <div class="container">
-
-      <div class="card">
-
-        <div style="font-size:4rem;">
-          👩‍🏫💖📚✨
-        </div>
-
-        <p class="quote">
-          "A good teacher teaches lessons,
-          but a great teacher leaves a little piece
-          of themselves in your heart." ❤️
-        </p>
-
-        <p>
-          And somehow...
-          you've managed to do both. 🥹🌷
-        </p>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- FINAL LOVE MESSAGE -->
-  <section class="love">
-
-    <h2>
-      Thank You ❤️
-    </h2>
-
-    <p>
-      Akshita, thank you for being the person you are.
-      Thank you for your patience, your kindness,
-      your smile and all those little things that make
-      you <strong>YOU</strong>. 🥹💕
-    </p>
-
-    <p style="margin-top:25px;">
-      Today I celebrate the teacher in you...
-      but every other day, I celebrate the person
-      I am lucky enough to have in my life. ❤️🌎
-    </p>
-
-    <div class="signature">
-      With lots and lots of love... 💕<br>
-      Yours ❤️
-    </div>
-
-    <div style="font-size:3rem; margin-top:35px;">
-      🌸 💖 🌷 👩‍🏫 📚 🥰 ✨ 💕 🌎 ❤️
-    </div>
-
-  </section>
-
-
-  <footer>
-    Made with ❤️ specially for Akshita 🌸
-    <br>
-    Happy Teachers' Day, Akshita! 👩‍🏫📚✨
-  </footer>
-
-
-  <!-- Little surprise -->
-  <script>
-
-    // Extra floating hearts
-    setInterval(() => {
-
-      const emojis = [
-        "❤️",
-        "💕",
-        "💖",
-        "✨",
-        "🌸",
-        "🌷",
-        "🥰",
-        "📚",
-        "👩‍🏫"
-      ];
-
-      const el = document.createElement("div");
-
-      el.className = "emoji";
-
-      el.innerText =
-        emojis[Math.floor(Math.random() * emojis.length)];
-
-      el.style.left =
-        Math.random() * 100 + "%";
-
-      el.style.animationDuration =
-        (7 + Math.random() * 8) + "s";
-
-      el.style.fontSize =
-        (18 + Math.random() * 18) + "px";
-
-      document.body.appendChild(el);
-
-      setTimeout(() => {
-        el.remove();
-      }, 15000);
-
-    }, 700);
-
-
-    // Smooth reveal
-    const cards = document.querySelectorAll(".card, .reason");
-
-    const observer = new IntersectionObserver(
-      entries => {
-
-        entries.forEach(entry => {
-
-          if (entry.isIntersecting) {
-
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-
-          }
-
-        });
-
-      },
-      {
-        threshold: 0.15
-      }
-    );
-
-    cards.forEach(card => {
-
-      card.style.opacity = "0";
-      card.style.transform = "translateY(30px)";
-      card.style.transition = "all 0.8s ease";
-
-      observer.observe(card);
-
-    });
-
-  </script>
-
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(en.isIntersecting){en.target.classList.add('in');
+    en.target.querySelectorAll('.row').forEach(r=>r.classList.add('in'));io.unobserve(en.target)}
+}),{threshold:.2});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
 </body>
 </html>
-```
